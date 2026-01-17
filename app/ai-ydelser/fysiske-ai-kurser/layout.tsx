@@ -15,9 +15,13 @@ export const metadata: Metadata = {
     "On-premise AI Kursus",
     "AI Opkvalificering",
   ],
+  alternates: {
+    canonical: "https://julianbentsingh.dk/ai-ydelser/fysiske-ai-kurser/",
+  },
   openGraph: {
     title: "Fysiske AI Kurser – AI Agenter, Vibe Coding & Prompting",
     description: "Lær at bygge AI Agenter, Vibe Code værktøjer og mestre advanced prompting. Dybdegående kurser afholdt hos jer eller i inspirerende omgivelser.",
+    url: "https://julianbentsingh.dk/ai-ydelser/fysiske-ai-kurser/",
     type: "website",
   },
 };

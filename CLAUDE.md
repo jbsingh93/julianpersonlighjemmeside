@@ -46,6 +46,65 @@ Next.js 16 personal portfolio/business website using App Router, TypeScript, and
 
 - ALWAYS READ 'prd\seo-strategi\sammenfattet-seo-strategi.md' BEFORE WORKING WITH ANY SEO PARTS OR NEW ROUTES/PAGES!
 
+#### SEO Checklist for Nye Sider/Routes
+
+Når du opretter en ny side eller route, skal du ALTID sikre følgende:
+
+1. **Metadata Export** (i page.tsx eller layout.tsx hvis "use client"):
+   ```typescript
+   export const metadata: Metadata = {
+     title: "Side Titel | Julian Bent Singh",
+     description: "150-160 tegn beskrivelse",
+     keywords: ["Relevant", "Keywords"],
+     alternates: {
+       canonical: "https://julianbentsingh.dk/sti-til-side/",
+     },
+     openGraph: {
+       title: "OG Titel",
+       description: "OG beskrivelse",
+       url: "https://julianbentsingh.dk/sti-til-side/",
+       type: "website",
+     },
+   };
+   ```
+
+2. **Canonical URL**:
+   - Skal ALTID inkluderes i metadata
+   - Format: `https://julianbentsingh.dk/sti/` (med trailing slash)
+   - Bruges i `alternates.canonical` og `openGraph.url`
+
+3. **Schema.org JSON-LD**:
+   - Brug builders fra `@/lib/schema`
+   - Konsistent brug af `personRef()`, `orgRef()`, `websiteRef()`
+   - Inkluder BreadcrumbList på alle undersider
+   - Validér med `/validate-schema` eller `npm run validate-schema`
+
+4. **Sitemap opdatering** (`app/sitemap.ts`):
+   - Tilføj ny route til sitemap
+   - Sæt passende `priority` (0.6-1.0)
+   - Sæt passende `changeFrequency`
+   - Eksempel:
+     ```typescript
+     {
+       url: `${SITE_URL}/ny-side/`,
+       lastModified: new Date(),
+       changeFrequency: 'monthly' as const,
+       priority: 0.8,
+     }
+     ```
+
+5. **Internal linking**:
+   - Sørg for at nye sider linkes fra relevante steder
+   - Opdatér navigationsmenu hvis nødvendigt
+   - Tilføj til relevante kategori-/oversigts-sider
+
+#### SEO Filer & Validering
+
+- **Sitemap**: `app/sitemap.ts` (auto-genereret til `/sitemap.xml`)
+- **Robots.txt**: `app/robots.ts` (auto-genereret til `/robots.txt`)
+- **Schema validering**: `npm run validate-schema` eller `/validate-schema`
+- **Validation report**: `SCHEMA-VALIDATION-REPORT.md`
+
 ### Language
 
 Site content is in Danish. Route names and UI text are in Danish (ai-ydelser, invester, referencer, om, kontakt)

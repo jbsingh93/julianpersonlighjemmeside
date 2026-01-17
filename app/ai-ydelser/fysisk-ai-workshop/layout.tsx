@@ -15,9 +15,13 @@ export const metadata: Metadata = {
     "On-premise AI Workshop",
     "Hands-on AI Workshop",
   ],
+  alternates: {
+    canonical: "https://julianbentsingh.dk/ai-ydelser/fysisk-ai-workshop/",
+  },
   openGraph: {
     title: "Fysiske AI Workshops – 5 Niveauer fra Chat AI til AI Agenter",
     description: "Skræddersyede AI workshops der løfter din virksomhed gennem de 5 niveauer af praktisk AI anvendelse.",
+    url: "https://julianbentsingh.dk/ai-ydelser/fysisk-ai-workshop/",
     type: "website",
   },
 };
