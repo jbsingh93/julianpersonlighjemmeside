@@ -8,6 +8,7 @@ import {
   SCHEMA_IDS,
   buildServiceSchema,
   buildBreadcrumbSchema,
+  personRef,
 } from "@/lib/schema";
 
 export const metadata: Metadata = {
@@ -57,7 +58,7 @@ export default function OnlineWorkshopsPage() {
               "name": "AI-Genereret Indhold – Skab bedre tekster med kunstig intelligens",
               "url": "https://www.merkdanmark.dk/arrangementer/ai-genereret-indhold-skab-bedre-tekster-med-kunstig-intelligens",
               "organizer": { "@type": "Organization", "name": "MERK Danmark" },
-              "performer": { "@id": SCHEMA_IDS.person }
+              "performer": personRef()
             }
           },
           {
@@ -68,7 +69,7 @@ export default function OnlineWorkshopsPage() {
               "name": "AI & Kundeforståelse",
               "url": "https://merkd-v12-fm.euwest01.umbraco.io/arrangementer/ai-kundeforstaaelse-brug-ai-til-at-analysere-og-forbedre-kunderejsen/",
               "organizer": { "@type": "Organization", "name": "MERK Danmark" },
-              "performer": { "@id": SCHEMA_IDS.person }
+              "performer": personRef()
             }
           },
           {
@@ -80,7 +81,7 @@ export default function OnlineWorkshopsPage() {
               "url": "https://event.ai-growth-minds.dk/",
               "organizer": { "@type": "Organization", "name": "AI Growth Minds" },
               "attendeeCount": 900,
-              "performer": { "@id": SCHEMA_IDS.person }
+              "performer": personRef()
             }
           },
           {
@@ -91,7 +92,7 @@ export default function OnlineWorkshopsPage() {
               "name": "AI Agenter på 3 dage",
               "url": "https://www.linkedin.com/posts/julianbentsingh_1111-tilmeldte-til-mit-3-dages-webinar-om-activity-7371145885835100162-rcbF/",
               "attendeeCount": 1200,
-              "performer": { "@id": SCHEMA_IDS.person }
+              "performer": personRef()
             }
           }
         ]
