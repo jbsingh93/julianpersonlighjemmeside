@@ -733,6 +733,17 @@ export default function AboutPage() {
             <ul className="list-disc list-inside space-y-3 ml-4">
               <li>
                 <a
+                  href="https://ai-advisory-board.ai-growth-minds.dk/"
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  className="text-blue-600 hover:underline"
+                >
+                  AI Advisory Board
+                </a>{" "}
+                – Gratis AI-drevet advisory board app til strategisk sparring og beslutningsstøtte.
+              </li>
+              <li>
+                <a
                   href="https://chatgpt.com/g/g-I2LQ7UWw4-korrekturlaeser"
                   target="_blank"
                   rel="noopener noreferrer nofollow"
