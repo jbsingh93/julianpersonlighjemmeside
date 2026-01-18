@@ -288,6 +288,13 @@ export function buildOmtalePageSchema() {
           name: mention.name,
           url: mention.url,
           about: personRef(),
+          // VideoObject-specifikke felter (påkrævet af Google)
+          ...(mention.type === "VideoObject" && "description" in mention && {
+            description: mention.description,
+            thumbnailUrl: mention.thumbnailUrl,
+            uploadDate: mention.uploadDate,
+            embedUrl: mention.embedUrl,
+          }),
         },
       })),
     },

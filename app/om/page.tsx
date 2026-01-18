@@ -77,6 +77,13 @@ export default function AboutPage() {
             "@type": mention.type,
             name: mention.name,
             url: mention.url,
+            // VideoObject-specifikke felter (påkrævet af Google)
+            ...(mention.type === "VideoObject" && "description" in mention && {
+              description: mention.description,
+              thumbnailUrl: mention.thumbnailUrl,
+              uploadDate: mention.uploadDate,
+              embedUrl: mention.embedUrl,
+            }),
           })),
           {
             "@type": "Book",
