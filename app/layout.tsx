@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   description: "Danmarks førende ekspert i kunstig intelligens, strategisk implementering og investeringer.",
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "any" },
+      { url: "/Julian-bent-singh-favicon.ico", sizes: "any" },
       { url: "/Julian-bent-singh-favicon.png", type: "image/png", sizes: "192x192" },
     ],
     apple: {
