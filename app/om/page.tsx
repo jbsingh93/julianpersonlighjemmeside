@@ -56,6 +56,38 @@ export default function AboutPage() {
       },
       {
         ...buildPersonSchema(true),
+        // Notable achievements / awards
+        award: [
+          "#1 på Danmarks 15 førende AI-eksperter 2025 (Seniorfolk.dk)",
+          "#1 på Danmarks 10 største AI-influencers (Ritzau/24Victoria)",
+          "2.800+ professionelle opkvalificeret i AI i 2025",
+          "25.000+ AI-genererede tekster produceret siden 2019",
+          "Stifter af 4 AI-virksomheder siden 2018",
+          "50+ nordiske virksomheder coachet siden 2019",
+          "Bogbidragyder til Agentbogen (2025)",
+        ],
+        hasCredential: [
+          {
+            "@type": "EducationalOccupationalCredential",
+            credentialCategory: "award",
+            name: "#1 AI Ekspert i Danmark 2025",
+            recognizedBy: {
+              "@type": "Organization",
+              name: "Seniorfolk.dk",
+              url: "https://seniorfolk.dk/",
+            },
+          },
+          {
+            "@type": "EducationalOccupationalCredential",
+            credentialCategory: "award",
+            name: "#1 AI Influencer i Danmark",
+            recognizedBy: {
+              "@type": "Organization",
+              name: "Ritzau/24Victoria",
+              url: "https://via.ritzau.dk/",
+            },
+          },
+        ],
         // Extended with additional roles
         affiliation: [
           {
@@ -190,10 +222,115 @@ export default function AboutPage() {
             </p>
           </div>
 
+          {/* Betydelige Bedrifter - Notable Achievements */}
+          <section id="bedrifter" className="mb-10">
+            <div className="bg-amber-50 border border-amber-200 p-5 rounded-sm">
+              <h2 className="text-xl font-bold mb-4 border-b border-amber-300 pb-2">
+                Betydelige bedrifter
+              </h2>
+              <ul className="space-y-2 text-zinc-800">
+                <li className="flex items-start gap-2">
+                  <span className="text-amber-600 font-bold">•</span>
+                  <span>
+                    <strong className="text-zinc-900">2.800+ professionelle</strong>{" "}
+                    opkvalificeret i AI i 2025 –{" "}
+                    <a
+                      href="https://ai-growth-minds.dk/"
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                      className="text-blue-600 hover:underline"
+                    >
+                      AI Growth Minds
+                    </a>
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-amber-600 font-bold">•</span>
+                  <span>
+                    <strong className="text-zinc-900">#1 AI-ekspert</strong> i Danmark – Kåret af{" "}
+                    <a
+                      href="https://seniorfolk.dk/danmarks-forende-15-eksperter-i-ai-2025/"
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                      className="text-blue-600 hover:underline"
+                    >
+                      Seniorfolk.dk
+                    </a>{" "}
+                    og{" "}
+                    <a
+                      href="https://via.ritzau.dk/pressemeddelelse/14539618/dem-bor-du-folge-de-10-storste-ai-influencers"
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                      className="text-blue-600 hover:underline"
+                    >
+                      Ritzau
+                    </a>
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-amber-600 font-bold">•</span>
+                  <span>
+                    <strong className="text-zinc-900">25.000+ AI-tekster</strong>{" "}
+                    produceret siden 2019 – Genereret millioner af klik for klienter
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-amber-600 font-bold">•</span>
+                  <span>
+                    <strong className="text-zinc-900">4 AI-virksomheder</strong> stiftet siden 2018 – Inkl.{" "}
+                    <a
+                      href="https://www.vallora.dk/"
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                      className="text-blue-600 hover:underline"
+                    >
+                      Vallora AI
+                    </a>{" "}
+                    (25+ mio. kr. værdiansættelse)
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-amber-600 font-bold">•</span>
+                  <span>
+                    <strong className="text-zinc-900">50+ virksomheder</strong> coachet i Norden siden 2019 –{" "}
+                    <a
+                      href="https://dataforeningen.no/profiler/julian-bent-singh"
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                      className="text-blue-600 hover:underline"
+                    >
+                      Dataforeningen Norge
+                    </a>
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-amber-600 font-bold">•</span>
+                  <span>
+                    <strong className="text-zinc-900">Bogbidragyder</strong> til{" "}
+                    <a
+                      href="https://www.linkedin.com/posts/jloew_aiagenter-activity-7325383838711345152-Kvbk"
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                      className="text-blue-600 hover:underline"
+                    >
+                      Agentbogen
+                    </a>{" "}
+                    (2025) – Blandt 40 af &quot;landets skarpeste AI-hjerner&quot;
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </section>
+
           {/* Table of Contents */}
           <div className="bg-zinc-50 border border-zinc-200 p-4 mb-8 w-fit min-w-[300px] rounded-sm">
             <h2 className="text-xl font-bold mb-2">Indholdsfortegnelse</h2>
             <ul className="list-decimal list-inside text-blue-600 space-y-1 text-sm">
+              <li>
+                <a href="#bedrifter" className="hover:underline">
+                  Betydelige bedrifter
+                </a>
+              </li>
               <li>
                 <a href="#roller" className="hover:underline">
                   Nuværende Roller
