@@ -1567,8 +1567,8 @@ export default function AboutPage() {
         </div>
 
         {/* Info Box Column (Wikipedia Style) */}
-        <div className="md:col-span-4 lg:col-span-3">
-          <div className="border border-zinc-300 bg-zinc-50 p-4 text-sm sticky top-24">
+        <div className="md:col-span-4 lg:col-span-3 order-first md:order-last">
+          <div className="border border-zinc-300 bg-zinc-50 p-4 text-sm md:sticky md:top-24">
             <div className="mb-4 relative aspect-square bg-zinc-200 border border-zinc-300 overflow-hidden">
               <Image
                 src="/om/Førende-AI-ekspert-Julian-Bent-Singh.png"
