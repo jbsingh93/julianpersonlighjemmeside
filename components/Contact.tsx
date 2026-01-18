@@ -276,10 +276,6 @@ export default function Contact() {
                         </form>
                     </div>
                 </div>
-
-                <div className="mt-12 text-center">
-                    <p className="text-zinc-500 text-sm">Julian Bent Singh • +45 00 00 00 00 • kontakt@julianbentsingh.dk</p>
-                </div>
             </div>
         </section>
     );
