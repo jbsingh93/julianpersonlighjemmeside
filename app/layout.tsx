@@ -19,6 +19,17 @@ export const metadata: Metadata = {
     default: "Julian Bent Singh - Førende AI Ekspert & AI Underviser",
   },
   description: "Danmarks førende ekspert i kunstig intelligens, strategisk implementering og investeringer.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/Julian-bent-singh-favicon.png", type: "image/png", sizes: "192x192" },
+    ],
+    apple: {
+      url: "/Julian-bent-singh-favicon.png",
+      sizes: "180x180",
+      type: "image/png",
+    },
+  },
 };
 
 export default function RootLayout({
