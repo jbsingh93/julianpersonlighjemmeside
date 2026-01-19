@@ -5,10 +5,10 @@ import Avatar from "@/components/Avatar";
 import {
   SITE_URL,
   SCHEMA_IDS,
+  JULIAN_DATA,
   buildOmtalePageSchema,
   buildBreadcrumbSchema,
   HIGH_AUTHORITY_MENTIONS,
-  personRef,
 } from "@/lib/schema";
 
 export const metadata: Metadata = {
@@ -156,11 +156,17 @@ export default function ReferencesPage() {
         ]),
         "@id": `${SITE_URL}/referencer/#breadcrumb`,
       },
-      // Schema for LinkedIn mentions
+      // Schema for LinkedIn mentions - itemReviewed must be a valid type (LocalBusiness, Organization, etc.)
+      // Person is NOT a valid itemReviewed type per Google's guidelines
       ...LINKEDIN_MENTIONS.map((mention, index) => ({
         "@type": "Review",
         "@id": `${SITE_URL}/referencer/#linkedin-${index}`,
-        itemReviewed: personRef(),
+        itemReviewed: {
+          "@type": "LocalBusiness",
+          "@id": SCHEMA_IDS.organization,
+          name: JULIAN_DATA.name,
+          url: SITE_URL,
+        },
         author: {
           "@type": "Person",
           name: mention.name,
