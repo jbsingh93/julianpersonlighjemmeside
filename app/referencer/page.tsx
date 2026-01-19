@@ -156,16 +156,15 @@ export default function ReferencesPage() {
         ]),
         "@id": `${SITE_URL}/referencer/#breadcrumb`,
       },
-      // Schema for LinkedIn mentions - itemReviewed must be a valid type (LocalBusiness, Organization, etc.)
-      // Person is NOT a valid itemReviewed type per Google's guidelines
+      // Schema for LinkedIn mentions - using Organization (AI Growth Minds)
+      // Person is NOT a valid itemReviewed type, and LocalBusiness requires address
       ...LINKEDIN_MENTIONS.map((mention, index) => ({
         "@type": "Review",
         "@id": `${SITE_URL}/referencer/#linkedin-${index}`,
         itemReviewed: {
-          "@type": "LocalBusiness",
-          "@id": SCHEMA_IDS.organization,
-          name: JULIAN_DATA.name,
-          url: SITE_URL,
+          "@type": "Organization",
+          name: "AI Growth Minds",
+          url: "https://ai-growth-minds.dk/",
         },
         author: {
           "@type": "Person",
