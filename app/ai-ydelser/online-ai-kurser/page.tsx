@@ -138,7 +138,11 @@ export default function OnlineCoursesPage() {
         description:
           "AI Growth Minds er Danmarks bedste og mest eftertragtede online AI kursus. Udviklet af Julian Bent Singh, Danmarks førende AI-underviser og kursusudbyder. Lær AI automation, AI agents og vibe coding.",
         url: AI_GROWTH_MINDS.url,
-        provider: orgRef(),
+        provider: {
+          "@type": "Organization",
+          "@id": SCHEMA_IDS.organization,
+          name: "AI Growth Minds",
+        },
         educationalLevel: "Intermediate",
         inLanguage: "da",
         hasCourseInstance: {
@@ -155,7 +159,16 @@ export default function OnlineCoursesPage() {
             category: "Paid"
           }
         },
-        about: aiGrowthMindsModules.map((m) => m.name), // Using 'about' instead of syllabusSections
+        about: [
+          { "@type": "Thing", name: "AI Automation" },
+          { "@type": "Thing", name: "AI Agents" },
+          { "@type": "Thing", name: "Vibe Coding" },
+          { "@type": "Thing", name: "Prompting Mastery" },
+          { "@type": "Thing", name: "ChatGPT kursus" },
+          { "@type": "Thing", name: "Claude Code" },
+          { "@type": "Thing", name: "Lovable" },
+          { "@type": "Thing", name: "n8n" },
+        ],
       },
       // Custom course development service
       {

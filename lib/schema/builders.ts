@@ -70,6 +70,7 @@ export function buildOrganizationSchema() {
     },
     email: ORG_DATA.email,
     telephone: ORG_DATA.telephone,
+    address: ORG_DATA.address,
     founder: personRef(),
     areaServed: ORG_DATA.areaServed,
     sameAs: ORG_DATA.sameAs,
@@ -280,23 +281,48 @@ export function buildOmtalePageSchema() {
       "@type": "ItemList",
       name: "Udvalgte omtaler",
       numberOfItems: HIGH_AUTHORITY_MENTIONS.length,
-      itemListElement: HIGH_AUTHORITY_MENTIONS.map((mention, index) => ({
-        "@type": "ListItem",
-        position: index + 1,
-        item: {
+      itemListElement: HIGH_AUTHORITY_MENTIONS.map((mention, index) => {
+        const baseItem = {
           "@type": mention.type,
           name: mention.name,
           url: mention.url,
           about: personRef(),
-          // VideoObject-specifikke felter (påkrævet af Google)
-          ...(mention.type === "VideoObject" && "description" in mention && {
-            description: mention.description,
-            thumbnailUrl: mention.thumbnailUrl,
-            uploadDate: mention.uploadDate,
-            embedUrl: mention.embedUrl,
-          }),
-        },
-      })),
+        };
+
+        // Add VideoObject-specific required fields
+        if (mention.type === "VideoObject" && "description" in mention) {
+          return {
+            "@type": "ListItem",
+            position: index + 1,
+            item: {
+              ...baseItem,
+              description: mention.description,
+              thumbnailUrl: mention.thumbnailUrl,
+              uploadDate: mention.uploadDate,
+              embedUrl: mention.embedUrl,
+            },
+          };
+        }
+
+        // Add SoftwareApplication-specific required fields
+        if (mention.type === "SoftwareApplication" && "applicationCategory" in mention) {
+          return {
+            "@type": "ListItem",
+            position: index + 1,
+            item: {
+              ...baseItem,
+              applicationCategory: mention.applicationCategory,
+              operatingSystem: mention.operatingSystem,
+            },
+          };
+        }
+
+        return {
+          "@type": "ListItem",
+          position: index + 1,
+          item: baseItem,
+        };
+      }),
     },
   };
 }

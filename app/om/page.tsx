@@ -105,18 +105,33 @@ export default function AboutPage() {
         ],
         // Subject of press mentions and authored articles
         subjectOf: [
-          ...HIGH_AUTHORITY_MENTIONS.slice(0, 10).map((mention) => ({
-            "@type": mention.type,
-            name: mention.name,
-            url: mention.url,
-            // VideoObject-specifikke felter (påkrævet af Google)
-            ...(mention.type === "VideoObject" && "description" in mention && {
-              description: mention.description,
-              thumbnailUrl: mention.thumbnailUrl,
-              uploadDate: mention.uploadDate,
-              embedUrl: mention.embedUrl,
-            }),
-          })),
+          ...HIGH_AUTHORITY_MENTIONS.slice(0, 10).map((mention) => {
+            if (mention.type === "VideoObject" && "description" in mention) {
+              return {
+                "@type": mention.type,
+                name: mention.name,
+                url: mention.url,
+                description: mention.description,
+                thumbnailUrl: mention.thumbnailUrl,
+                uploadDate: mention.uploadDate,
+                embedUrl: mention.embedUrl,
+              };
+            }
+            if (mention.type === "SoftwareApplication" && "applicationCategory" in mention) {
+              return {
+                "@type": mention.type,
+                name: mention.name,
+                url: mention.url,
+                applicationCategory: mention.applicationCategory,
+                operatingSystem: mention.operatingSystem,
+              };
+            }
+            return {
+              "@type": mention.type,
+              name: mention.name,
+              url: mention.url,
+            };
+          }),
           {
             "@type": "Book",
             name: "Agentbogen",

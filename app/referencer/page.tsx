@@ -158,7 +158,7 @@ export default function ReferencesPage() {
       },
       // Schema for LinkedIn mentions
       ...LINKEDIN_MENTIONS.map((mention, index) => ({
-        "@type": "Recommendation",
+        "@type": "Review",
         "@id": `${SITE_URL}/referencer/#linkedin-${index}`,
         itemReviewed: personRef(),
         author: {

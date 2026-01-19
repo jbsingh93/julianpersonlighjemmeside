@@ -73,7 +73,14 @@ export const ORG_DATA = {
   url: SITE_URL,
   logo: `${SITE_URL}/logo.png`, // TODO: Opdater med rigtigt logo
   email: "kontakt@julianbentsingh.dk",
-  telephone: "+45 00 00 00 00", // TODO: Opdater med rigtigt nummer
+  telephone: "+45 42 46 88 35",
+  address: {
+    "@type": "PostalAddress" as const,
+    streetAddress: "Grundtvigs Alle 137",
+    postalCode: "6700",
+    addressLocality: "Esbjerg",
+    addressCountry: "DK",
+  },
 
   // Relaterede brands
   sameAs: [
@@ -110,7 +117,7 @@ export const HIGH_AUTHORITY_MENTIONS = [
     url: "https://www.youtube.com/watch?v=Wo2Wq5fvitI",
     description: "Julian Bent Singh holder oplæg om AI strategi og implementering til konference.",
     thumbnailUrl: "https://img.youtube.com/vi/Wo2Wq5fvitI/maxresdefault.jpg",
-    uploadDate: "2024-05-15",
+    uploadDate: "2024-05-15T12:00:00+02:00",
     embedUrl: "https://www.youtube.com/embed/Wo2Wq5fvitI",
   },
   {
@@ -119,7 +126,7 @@ export const HIGH_AUTHORITY_MENTIONS = [
     url: "https://www.youtube.com/watch?v=oi6XhkeyKrU",
     description: "Julian Bent Singh deler viden om praktisk AI-anvendelse i virksomheder.",
     thumbnailUrl: "https://img.youtube.com/vi/oi6XhkeyKrU/maxresdefault.jpg",
-    uploadDate: "2024-06-20",
+    uploadDate: "2024-06-20T12:00:00+02:00",
     embedUrl: "https://www.youtube.com/embed/oi6XhkeyKrU",
   },
   {
@@ -128,7 +135,7 @@ export const HIGH_AUTHORITY_MENTIONS = [
     url: "https://www.youtube.com/watch?v=UN0eHK82NyA",
     description: "Podcast om AI og SEO med Julian Bent Singh som gæst. Diskussion om hvordan AI transformerer digital marketing.",
     thumbnailUrl: "https://img.youtube.com/vi/UN0eHK82NyA/maxresdefault.jpg",
-    uploadDate: "2024-03-10",
+    uploadDate: "2024-03-10T12:00:00+01:00",
     embedUrl: "https://www.youtube.com/embed/UN0eHK82NyA",
   },
   {
@@ -137,7 +144,7 @@ export const HIGH_AUTHORITY_MENTIONS = [
     url: "https://www.youtube.com/watch?v=EcbXYMa3Neo",
     description: "Julian Bent Singh deler AI-ekspertise og indsigter om fremtidens teknologi i podcast-format.",
     thumbnailUrl: "https://img.youtube.com/vi/EcbXYMa3Neo/maxresdefault.jpg",
-    uploadDate: "2024-04-25",
+    uploadDate: "2024-04-25T12:00:00+02:00",
     embedUrl: "https://www.youtube.com/embed/EcbXYMa3Neo",
   },
   {
@@ -204,6 +211,8 @@ export const HIGH_AUTHORITY_MENTIONS = [
     type: "SoftwareApplication" as const,
     name: "Korrekturlæser – Custom GPT",
     url: "https://chatgpt.com/g/g-I2LQ7UWw4-korrekturlaeser",
+    applicationCategory: "AI Assistant",
+    operatingSystem: "Web Browser",
   },
   {
     type: "Article" as const,
