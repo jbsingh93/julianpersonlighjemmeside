@@ -336,19 +336,43 @@ export function buildArticleSchema(options: ArticleOptions) {
 
 ### 4.2 `buildBlogCollectionSchema()`
 
+Returnerer BÅDE CollectionPage og Blog entity (to entries til @graph):
+
 ```typescript
 export function buildBlogCollectionSchema() {
-  return {
-    "@type": "CollectionPage",
-    "@id": SCHEMA_IDS.blogPage,
-    name: "Blog – Julian Bent Singh",
-    description: "Artikler om AI, teknologi og forretning af Julian Bent Singh.",
-    url: `${SITE_URL}/blog/`,
-    about: personRef(),
-    isPartOf: websiteRef(),
-    inLanguage: "da-DK",
-  };
+  return [
+    {
+      "@type": "CollectionPage",
+      "@id": SCHEMA_IDS.blogPage,
+      name: "Blog – Julian Bent Singh",
+      description: "Artikler om AI, teknologi og forretning af Julian Bent Singh.",
+      url: `${SITE_URL}/blog/`,
+      about: personRef(),
+      isPartOf: websiteRef(),
+      inLanguage: "da-DK",
+    },
+    {
+      "@type": "Blog",
+      "@id": `${SITE_URL}/blog/#blog`,
+      name: "Julian Bent Singh Blog",
+      description: "Artikler om AI, teknologi og forretning",
+      url: `${SITE_URL}/blog/`,
+      author: personRef(),
+      publisher: orgRef(),
+      inLanguage: "da-DK",
+    },
+  ];
 }
+
+// Brug i page.tsx:
+// const blogSchemas = buildBlogCollectionSchema();
+// const schema = {
+//   "@context": "https://schema.org",
+//   "@graph": [
+//     ...blogSchemas,
+//     buildBreadcrumbSchema([...]),
+//   ],
+// };
 ```
 
 ### 4.3 Integration med Eksisterende Builders

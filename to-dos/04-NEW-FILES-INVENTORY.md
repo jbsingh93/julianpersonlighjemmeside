@@ -16,8 +16,9 @@
 | CMS Components | 3 | 0 |
 | Blog Components | 7 | 0 |
 | Blog Pages | 6 | 0 |
+| Blog Error/Loading/NotFound | 4 | 0 |
 | Middleware | 1 | 0 |
-| **Total nye filer** | **34** | - |
+| **Total nye filer** | **38** | - |
 | Ændrede eksisterende filer | - | **8** |
 
 ---
@@ -546,6 +547,57 @@ Data fetching: getPublishedPosts(20)
 Response: application/xml med Cache-Control: 3600
 Indhold: Standard RSS 2.0 XML med Atom namespace
 Størrelse: ~50 linjer
+```
+
+---
+
+## BLOG ERROR/LOADING/NOT-FOUND FILER
+
+> **VIGTIGT**: Disse filer eksisterer IKKE i den nuværende kodebase. Bloggen er det første sted de bruges.
+
+### #35 `app/(main)/blog/not-found.tsx` — Blog 404 Side
+```
+Formål: Vises når en blog route ikke matcher nogen post/kategori
+Indhold:
+  - "Indlæg ikke fundet" overskrift
+  - Kort besked: "Det indlæg du leder efter findes ikke eller er blevet fjernet."
+  - Link tilbage til /blog
+  - Matcher dark theme (bg-black, text-white)
+Styling: Centreret content, max-w-2xl, yellow-400 accent på link
+Størrelse: ~25 linjer
+```
+
+### #36 `app/(main)/blog/[slug]/not-found.tsx` — Post-specifik 404
+```
+Formål: Vises når getPostBySlug returnerer null (notFound() kaldt)
+Indhold: Lignende som #35 men med "Denne artikel findes ikke" besked
+Størrelse: ~25 linjer
+```
+
+### #37 `app/(main)/blog/loading.tsx` — Blog Loading Skeleton
+```
+Formål: Vises mens blog hub data loader (Suspense boundary)
+Indhold:
+  - Skeleton placeholders for PostCard grid (pulserende grå bokse)
+  - Skeleton for kategori badges
+  - Matcher dark theme
+  - Bruger Tailwind animate-pulse utility
+"use client": NEJ (kan være server component)
+Størrelse: ~40 linjer
+```
+
+### #38 `app/(main)/blog/error.tsx` — Blog Error Boundary
+```
+Formål: Fanger runtime fejl i blog routes
+"use client" (PÅKRÆVET for error.tsx i Next.js)
+Props: { error: Error; reset: () => void }
+Indhold:
+  - "Noget gik galt" overskrift
+  - Fejlbesked (i development mode)
+  - "Prøv igen" knap (kalder reset())
+  - Link til /blog
+Styling: Dark theme, red accent for fejl
+Størrelse: ~30 linjer
 ```
 
 ---

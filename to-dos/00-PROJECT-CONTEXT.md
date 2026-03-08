@@ -44,8 +44,12 @@ julianpersonlighjemmeside/
 │   │   ├── ai-konsulent/page.tsx     ← /ai-ydelser/ai-konsulent
 │   │   ├── ai-mentor/page.tsx        ← /ai-ydelser/ai-mentor
 │   │   ├── foredrag/page.tsx         ← /ai-ydelser/foredrag
-│   │   ├── fysisk-ai-workshop/page.tsx
-│   │   ├── fysiske-ai-kurser/page.tsx
+│   │   ├── fysisk-ai-workshop/
+│   │   │   ├── layout.tsx            ← ⚠️ METADATA i layout (page er "use client")
+│   │   │   └── page.tsx
+│   │   ├── fysiske-ai-kurser/
+│   │   │   ├── layout.tsx            ← ⚠️ METADATA i layout (page er "use client")
+│   │   │   └── page.tsx
 │   │   ├── online-ai-kurser/page.tsx
 │   │   └── online-ai-workshop/page.tsx
 │   ├── invester/
@@ -63,10 +67,11 @@ julianpersonlighjemmeside/
 │   ├── Invest.tsx                    ← Invester section
 │   ├── References.tsx                ← Referencer section
 │   ├── About.tsx                     ← Om section
-│   ├── Contact.tsx                   ← Kontaktformular
+│   ├── Contact.tsx                   ← Kontaktformular (honeypot + timestamp spam)
 │   ├── TrustBadges.tsx               ← Trust badges
-│   ├── LogoCarousel.tsx              ← Logo karrusel
-│   └── JsonLd.tsx                    ← Schema.org JSON-LD renderer
+│   ├── LogoCarousel.tsx              ← Logo karrusel (CSS @keyframes, IKKE Framer Motion)
+│   ├── Avatar.tsx                    ← ⚠️ GENBRUGBAR: Initialer/billede avatar komponent
+│   └── JsonLd.tsx                    ← Schema.org JSON-LD renderer (schema-dts types)
 ├── lib/
 │   ├── validation.ts                 ← Zod schemas (kontaktformular)
 │   └── schema/
@@ -361,10 +366,29 @@ const nextConfig: NextConfig = { /* TOMT - defaults */ };
 - Hero.tsx, AIServices.tsx, etc. - bruger Framer Motion animationer
 - Contact.tsx - formular med state management
 
+### ⚠️ VIGTIGT: Metadata + "use client" Pattern
+Nogle sider har `"use client"` i `page.tsx` (for Framer Motion animationer). Da `"use client"` sider IKKE kan eksportere `metadata`, bruger disse sider en **separat `layout.tsx`** til metadata:
+
+```
+fysisk-ai-workshop/
+  layout.tsx    ← export const metadata (Server Component)
+  page.tsx      ← "use client" + Framer Motion (Client Component)
+```
+
+**Eksisterende sider med dette pattern:**
+- `app/ai-ydelser/fysisk-ai-workshop/layout.tsx` → metadata
+- `app/ai-ydelser/fysiske-ai-kurser/layout.tsx` → metadata
+
+**For blog:** `generateMetadata` i blog `page.tsx` filer kræver Server Components. Brug client component WRAPPERS (som ViewCounter) i stedet for at gøre hele page "use client".
+
 ### JsonLd Component
 ```typescript
-// Simpel wrapper der serialiserer schema til <script type="application/ld+json">
-export default function JsonLd({ schema }: { schema: SchemaType }) {
+// Bruger schema-dts types: Thing, WithContext, Graph
+import { Thing, WithContext, Graph } from "schema-dts";
+
+type SchemaType = WithContext<Thing> | Graph | Record<string, unknown>;
+
+export default function JsonLd({ schema }: JsonLdProps) {
   return (
     <script
       type="application/ld+json"
@@ -373,6 +397,55 @@ export default function JsonLd({ schema }: { schema: SchemaType }) {
   );
 }
 ```
+**VIGTIGT**: `Record<string, unknown>` type sikrer at vores custom schema objekter (som ikke nødvendigvis matcher schema-dts fuldt) stadig accepteres.
+
+### Avatar Component (GENBRUGBAR)
+```typescript
+// components/Avatar.tsx - kan bruges til blog forfatter-visning
+interface AvatarProps {
+  name: string;         // Bruges til initialer + farve-hash
+  imagePath?: string;   // Valgfrit billede
+  size?: "sm" | "md" | "lg";  // 32px / 40px / 48px
+}
+// Genererer deterministisk farve fra navn-hash
+// Viser initialer som fallback når intet billede
+```
+
+### Animations Pattern (Framer Motion)
+Konsistent mønster brugt på tværs af alle animerede komponenter:
+```typescript
+// Standard fade-in fra bunden
+initial={{ opacity: 0, y: 20 }}
+animate={{ opacity: 1, y: 0 }}
+transition={{ duration: 0.6 }}
+
+// Scroll-triggered (kører KUN én gang)
+whileInView={{ opacity: 1, y: 0 }}
+viewport={{ once: true }}
+
+// Staggered children
+transition={{ delay: index * 0.1 }}
+```
+**Blog komponenter SKAL følge dette mønster** for visuel konsistens.
+
+### LogoCarousel Pattern (CSS Animation)
+LogoCarousel bruger IKKE Framer Motion men custom CSS:
+```css
+@keyframes scroll-infinite {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+```
+Med duplikeret logo-array for seamless loop og gradient overlays for fade-effekt.
+
+### Ingen error/loading/not-found filer
+Kodbasen har pt. INGEN:
+- `error.tsx` (fejlhåndtering)
+- `loading.tsx` (loading states)
+- `not-found.tsx` (404 sider)
+- Suspense boundaries
+
+**Blog SKAL tilføje disse** for bedre UX (se 04-NEW-FILES-INVENTORY.md).
 
 ---
 
@@ -441,3 +514,52 @@ export const contactFormSchema = z.object({
 | `lib/schema/index.ts` | Re-export nye builders | **LAV** | Eksisterende exports uændrede |
 | `next.config.ts` | Tilføj Supabase image domain | **LAV** | Ingen regression |
 | Alle `app/*/page.tsx` | Flyttes til `app/(main)/*/page.tsx` | **HØJ** | Alle routes skal fortsat virke |
+| `app/ai-ydelser/fysisk-ai-workshop/layout.tsx` | Flyttes med til `app/(main)/` | **HØJ** | Metadata skal stadig virke |
+| `app/ai-ydelser/fysiske-ai-kurser/layout.tsx` | Flyttes med til `app/(main)/` | **HØJ** | Metadata skal stadig virke |
+
+---
+
+## 16. NAVBAR PATHNAME DETECTION
+
+### ⚠️ KRITISK DETALJE
+Navbar.tsx bruger `usePathname()` til at bestemme styling:
+```typescript
+const isHomePage = pathname === "/";
+const isWikiPage = pathname === "/om";
+```
+
+**Route groups ændrer IKKE pathnames.** `app/(main)/om/page.tsx` har stadig pathname `/om`.
+Derfor vil Navbar-logikken FORTSAT virke korrekt efter refaktorering.
+
+**For blog sider**: Blog bruger standard dark theme → Navbar viser standard variant (transparent → glass).
+
+---
+
+## 17. .GITIGNORE STATUS
+
+`.gitignore` ignorerer ALLEREDE `.env*` filer:
+```
+.env*
+```
+
+**Ingen ændring nødvendig** til `.gitignore` for Supabase env vars.
+Men: Vi bør oprette en `.env.example` fil til dokumentation af krævede env vars.
+
+---
+
+## 18. HARDCODED DATA ARRAYS (FREMTIDIG MIGRATION)
+
+Følgende data er pt. hardcoded i komponenter (IKKE del af blog-implementeringen, men vigtig kontekst):
+
+| Komponent | Data | Antal Items |
+|-----------|------|-------------|
+| `LogoCarousel.tsx` | Company logos | 15 |
+| `References.tsx` | TESTIMONIALS array | 4 |
+| `TrustBadges.tsx` | TOP_MENTIONS array | 3 |
+| `constants.ts` | HIGH_AUTHORITY_MENTIONS | 18 |
+| `AIServices.tsx` | Services array | 7 |
+| `ai-ydelser/page.tsx` | Services array (detaljeret) | 7 |
+| `ai-ydelser/page.tsx` | FAQ items | 4 |
+| `referencer/page.tsx` | LinkedIn mentions + Trustpilot reviews | ~10 |
+
+**IKKE del af blog scope** — nævnt for fuldstændighedens skyld.

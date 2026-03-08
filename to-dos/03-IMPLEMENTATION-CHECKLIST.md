@@ -87,9 +87,12 @@
   - Ændring: Tilføj `images.remotePatterns` for `*.supabase.co`
   - ⚠️ REGRESSION CHECK: Eksisterende config skal forblive uændret
 
-- [ ] **1.4** Opdatér `.gitignore`
-  - Verificér at `.env.local` er ignoreret
-  - Tilføj: `.env*.local` pattern hvis ikke allerede der
+- [ ] **1.4** Opret `.env.example` (dokumentation af krævede env vars)
+  - Fil: `.env.example` (project root)
+  - Indhold: Alle env var names UDEN værdier (template)
+  - ⚠️ `.gitignore` ignorerer allerede `.env*` — `.env.example` SKAL IKKE ignoreres
+  - Rename til `.env.example` (ikke `.env.local.example`) så den IKKE matches af `.env*` glob
+  - Alternativt: Dokumentér env vars i CLAUDE.md eller README i stedet
 
 ---
 
@@ -125,6 +128,10 @@
 
 - [ ] **2.8** Flyt `app/ai-ydelser/` → `app/(main)/ai-ydelser/`
   - ⚠️ URL skal stadig være `/ai-ydelser/*`
+  - ⚠️ VIGTIGT: Inkluderer sub-page `layout.tsx` filer:
+    - `fysisk-ai-workshop/layout.tsx` (eksporterer metadata separat fra page)
+    - `fysiske-ai-kurser/layout.tsx` (eksporterer metadata separat fra page)
+  - Disse layout filer SKAL flyttes med — de indeholder SEO metadata!
 
 - [ ] **2.9** Flyt `app/invester/` → `app/(main)/invester/`
   - ⚠️ URL skal stadig være `/invester/*`
@@ -374,7 +381,15 @@
   - Ref: `01-ARCHITECTURE-PLAN.md` → Sektion 15
   - Ref: `04-NEW-FILES-INVENTORY.md` → #34
 
-- [ ] **6.15** TEST: Verificér blog frontend
+- [ ] **6.15** Opret error/loading/not-found filer for blog
+  - `app/(main)/blog/not-found.tsx` — "Indlæg ikke fundet" side (404)
+  - `app/(main)/blog/loading.tsx` — Loading skeleton for blog sider
+  - `app/(main)/blog/[slug]/not-found.tsx` — "Indlæg ikke fundet" for specifikke slugs
+  - `app/(main)/blog/error.tsx` — Error boundary ("use client", Reset knap)
+  - ⚠️ Disse eksisterer IKKE i den nuværende kodebase — blog er FØRSTE sted de bruges
+  - Design: Match dark theme, venlig dansk fejlbesked, link tilbage til /blog
+
+- [ ] **6.16** TEST: Verificér blog frontend
   - Test: `/blog` viser kategorier, seneste og mest læste
   - Test: `/blog/[slug]` renderer markdown korrekt
   - Test: Table of contents fungerer (scroll til heading)

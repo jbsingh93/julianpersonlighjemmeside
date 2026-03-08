@@ -210,6 +210,27 @@ function generateSlug(title: string): string {
 - Konsistent med eksisterende site mønster
 - `SITE_URL` constant bruges overalt (aldrig hardcoded URL)
 
+### 4.6 "use client" + Metadata Conflict
+**Risiko**: Blog page bruger Framer Motion animationer → `"use client"` → kan IKKE eksportere `metadata` eller `generateMetadata`.
+**Mitigering**:
+- Blog post page (`/blog/[slug]/page.tsx`) SKAL være Server Component for `generateMetadata`
+- Brug client component WRAPPERS for interaktive dele:
+  - `ViewCounter` → client component, importeret i server page
+  - `ShareButtons` → client component, importeret i server page
+  - `TableOfContents` → client component, importeret i server page
+  - `BlogSearch` → client component, importeret i server page
+- Framer Motion animationer i blog: Brug IKKE `"use client"` på page niveau
+- Alternativt: Brug `layout.tsx` pattern (som `fysisk-ai-workshop/`) for metadata, men dette er unødvendigt da vi ikke behøver Framer Motion på hele page'en
+- **Eksisterende pattern-reference**: `app/ai-ydelser/fysisk-ai-workshop/layout.tsx` + `page.tsx`
+
+### 4.7 Schema-dts Type Compatibility
+**Risiko**: Nye schema builders returnerer objekter der ikke matcher `schema-dts` types i `JsonLd` component.
+**Mitigering**:
+- `JsonLd` component accepterer `Record<string, unknown>` som fallback type
+- Vores custom schema objekter (Article, Blog, CollectionPage) behøver ikke at matche schema-dts 100%
+- `dangerouslySetInnerHTML` med `JSON.stringify` accepterer ethvert objekt
+- Vigtigst: Schema skal være valid JSON-LD, ikke TypeScript-valid schema-dts
+
 ---
 
 ## 5. PERFORMANCE

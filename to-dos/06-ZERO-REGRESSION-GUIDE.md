@@ -184,6 +184,18 @@ mv app/referencer app/(main)/referencer
 mv app/actions app/(main)/actions
 ```
 
+### ⚠️ VIGTIGT: Sub-page Layout Filer
+Følgende undermapper har EGNE `layout.tsx` filer med metadata:
+```
+app/ai-ydelser/fysisk-ai-workshop/layout.tsx  ← eksporterer metadata
+app/ai-ydelser/fysiske-ai-kurser/layout.tsx   ← eksporterer metadata
+```
+Disse `layout.tsx` filer bruges fordi de tilsvarende `page.tsx` har `"use client"` (Framer Motion),
+og client components kan IKKE eksportere `metadata`. Løsningen er metadata i layout.
+
+**Disse filer flyttes AUTOMATISK med** via `mv app/ai-ydelser app/(main)/ai-ydelser` —
+men verificér at metadata stadig virker (tjek browser <title> på de to sider).
+
 ### Risikovurdering: MEDIUM
 - Filstier ændrer sig, men imports bruger `@/*` alias → INGEN import-ændringer
 - Route groups er invisible i URLs → INGEN URL-ændringer
@@ -192,6 +204,12 @@ mv app/actions app/(main)/actions
 ### Import-check:
 Alle eksisterende imports bruger `@/components/...`, `@/lib/...` format.
 Disse er ABSOLUTTE stier baseret på project root og påvirkes IKKE af route groups.
+
+### Pathname-check:
+Navbar bruger `usePathname()` med specifikke checks:
+- `pathname === "/"` → forsiden (transparent navbar)
+- `pathname === "/om"` → wiki/om-side (hvid navbar)
+Route groups ændrer IKKE pathnames. `/om` forbliver `/om` efter flytning til `(main)/om/`.
 
 ### Test efter ændring:
 1. `npm run dev` — ingen kompileringsfejl
@@ -415,16 +433,29 @@ export function buildArticleSchema(options: ArticleOptions) {
   };
 }
 
+// Returnerer ARRAY med CollectionPage + Blog entity (spread i @graph)
 export function buildBlogCollectionSchema() {
-  return {
-    "@type": "CollectionPage",
-    "@id": SCHEMA_IDS.blogPage,
-    name: "Blog – Julian Bent Singh",
-    description: "Artikler om AI, teknologi og forretning af Julian Bent Singh.",
-    url: `${SITE_URL}/blog/`,
-    about: personRef(),
-    inLanguage: "da-DK",
-  };
+  return [
+    {
+      "@type": "CollectionPage",
+      "@id": SCHEMA_IDS.blogPage,
+      name: "Blog – Julian Bent Singh",
+      description: "Artikler om AI, teknologi og forretning af Julian Bent Singh.",
+      url: `${SITE_URL}/blog/`,
+      about: personRef(),
+      isPartOf: websiteRef(),
+      inLanguage: "da-DK",
+    },
+    {
+      "@type": "Blog",
+      "@id": `${SITE_URL}/blog/#blog`,
+      name: "Julian Bent Singh Blog",
+      url: `${SITE_URL}/blog/`,
+      author: personRef(),
+      publisher: orgRef(),
+      inLanguage: "da-DK",
+    },
+  ];
 }
 ```
 

@@ -119,11 +119,26 @@ app/
     kontakt/page.tsx
     om/page.tsx
     referencer/page.tsx
-    ai-ydelser/...
+    ai-ydelser/
+      page.tsx
+      ai-konsulent/page.tsx
+      foredrag/page.tsx
+      fysisk-ai-workshop/
+        layout.tsx        ← ⚠️ Eksisterende metadata layout
+        page.tsx
+      fysiske-ai-kurser/
+        layout.tsx        ← ⚠️ Eksisterende metadata layout
+        page.tsx
+      ...
     invester/...
     blog/                 ← NYT: Blog frontend
       page.tsx
-      [slug]/page.tsx
+      loading.tsx         ← NYT: Loading skeleton
+      error.tsx           ← NYT: Error boundary
+      not-found.tsx       ← NYT: 404 side
+      [slug]/
+        page.tsx
+        not-found.tsx     ← NYT: Post-specifik 404
       kategori/[slug]/page.tsx
       tags/[slug]/page.tsx
       soeg/page.tsx
@@ -152,6 +167,11 @@ app/
 - `/blog` → `app/(main)/blog/page.tsx`
 - `/cms` → `app/(cms)/cms/page.tsx`
 - Hvert route group kan have sin EGEN `layout.tsx`
+- **Pathnames ændres IKKE**: `usePathname()` returnerer stadig `/om` (ikke `/(main)/om`)
+- **Eksisterende sub-layouts flyttes med**: `fysisk-ai-workshop/layout.tsx` og `fysiske-ai-kurser/layout.tsx`
+
+### VIGTIGT: "use client" + Metadata Pattern
+Nogle sider bruger `"use client"` i `page.tsx` (Framer Motion). Da client components IKKE kan eksportere `metadata`, bruger disse sider `layout.tsx` til metadata. Blog pages med `generateMetadata` SKAL være Server Components — brug client component wrappers for interaktive dele.
 
 ---
 
