@@ -1,20 +1,20 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { Shield, CheckCircle2, TrendingUp, Users, ArrowRight, Target, FileSearch, Lightbulb, MessageSquare } from "lucide-react";
+import { Shield, CheckCircle2, TrendingUp, Users, ArrowRight, Target, FileSearch, Lightbulb, MessageSquare, Eye, Compass, Zap, ExternalLink } from "lucide-react";
 import JsonLd from "@/components/JsonLd";
 import { SITE_URL, SCHEMA_IDS, buildServiceSchema, buildBreadcrumbSchema, buildFAQSchema, personRef, orgRef } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "AI Rådgivning til Investorer | Julian Bent Singh - Due Diligence & Tech Screening",
-  description: "Få teknisk validering af AI startups før investering. Julian Bent Singh tilbyder AI rådgivning til investorer, VC-fonde og Business Angels. Undgå at investere i snake oil.",
-  keywords: ["AI rådgivning til investorer", "AI due diligence", "teknisk screening startups", "VC AI advisor", "angel investor rådgivning", "AI startup validering"],
+  title: "AI Rådgivning til Investorer | Julian Bent Singh - Due Diligence, Tech Screening & AI Trend-Rådgivning",
+  description: "Få teknisk validering af AI startups og strategisk AI trend-rådgivning. Julian Bent Singh hjælper investorer, bestyrelser og topledelse med at forstå fremtidens AI-udvikling og investere rigtigt.",
+  keywords: ["AI rådgivning til investorer", "AI due diligence", "teknisk screening startups", "VC AI advisor", "angel investor rådgivning", "AI startup validering", "AI trends investering", "AI investerings-strategi", "AI fremtidstrends"],
   alternates: {
     canonical: `${SITE_URL}/invester/ai-raadgivning-til-investorer/`,
   },
   openGraph: {
-    title: "AI Rådgivning til Investorer - Teknisk Due Diligence",
-    description: "Validér dit dealflow teknisk. Undgå snake oil AI-startups. Ekspert rådgivning fra Julian Bent Singh.",
+    title: "AI Rådgivning til Investorer - Due Diligence & AI Trend-Rådgivning",
+    description: "Validér dit dealflow teknisk og forstå fremtidens AI-trends. Strategisk rådgivning fra Julian Bent Singh til investorer, bestyrelser og topledelse.",
     url: `${SITE_URL}/invester/ai-raadgivning-til-investorer/`,
     type: "website",
     images: [
@@ -44,6 +44,14 @@ const faqItems = [
   {
     question: "Arbejder du også med internationale deals?",
     answer: "Ja, jeg arbejder med både danske og internationale VC-fonde. Alle rapporter kan leveres på engelsk eller dansk.",
+  },
+  {
+    question: "Hvad dækker AI trend-rådgivningen?",
+    answer: "Jeg hjælper investorer, bestyrelser og topledelse med at forstå, hvilke AI-trends der kommer, og hvilke virksomheder der tapper ind i de rigtige muligheder. Det handler om at se forbi hype og forstå den teknologiske retning - fra agentic AI til nye infrastruktur-lag.",
+  },
+  {
+    question: "Hvordan kan du forudsige AI-trends?",
+    answer: "Jeg har 9 års hands-on erfaring med at bygge AI-produkter og følger udviklingen på det dybeste tekniske niveau. Jeg forudsagde og byggede allerede i 2020 den agentiske AI-tilgang vi ser i dag, Claudes dominans blandt professionelle, og fremkomsten af AI-organisationer og agentsystemer. Den indsigt kommer af at bygge med teknologien hver dag - ikke bare læse om den.",
   },
 ];
 
@@ -100,7 +108,7 @@ export default function InvestorAdvisoryPage() {
         "@id": `${SITE_URL}/invester/ai-raadgivning-til-investorer/#webpage`,
         url: `${SITE_URL}/invester/ai-raadgivning-til-investorer/`,
         name: "AI Rådgivning til Investorer | Julian Bent Singh",
-        description: "Teknisk due diligence og validering af AI startups for VC-fonde og Business Angels.",
+        description: "Teknisk due diligence, AI trend-rådgivning og strategisk validering for investorer, bestyrelser og topledelse.",
         speakable: {
           "@type": "SpeakableSpecification",
           cssSelector: [".hero-intro", ".service-description", ".faq-answer"]
@@ -111,7 +119,7 @@ export default function InvestorAdvisoryPage() {
         ...buildServiceSchema({
           id: `${SITE_URL}/invester/ai-raadgivning-til-investorer/#service`,
           name: "AI Rådgivning til Investorer",
-          description: "Teknisk due diligence, screening og validering af AI startups. Hjælp investorer med at undgå snake oil og identificere reelle AI-virksomheder.",
+          description: "Teknisk due diligence, AI trend-rådgivning og strategisk validering af AI startups. Hjælp investorer, bestyrelser og topledelse med at forstå fremtidens AI-udvikling og investere i de rigtige virksomheder.",
           url: `${SITE_URL}/invester/ai-raadgivning-til-investorer/`,
           serviceType: "Technical Advisory",
           priceDescription: "Kontakt for pris",
@@ -129,7 +137,7 @@ export default function InvestorAdvisoryPage() {
         ],
         audience: {
           "@type": "Audience",
-          audienceType: "Venture Capital Firms, Business Angels, Private Equity",
+          audienceType: "Venture Capital Firms, Business Angels, Private Equity, Bestyrelser, Topledelse",
         },
       },
       buildFAQSchema(faqItems),
@@ -159,7 +167,7 @@ export default function InvestorAdvisoryPage() {
             <div className="z-10">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-400/10 text-yellow-400 text-sm font-medium mb-6 border border-yellow-400/20">
                 <Shield className="w-4 h-4" />
-                <span>For VC-Fonde & Business Angels</span>
+                <span>For Investorer, Bestyrelser & Topledelse</span>
               </div>
 
               <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
@@ -167,7 +175,7 @@ export default function InvestorAdvisoryPage() {
               </h1>
 
               <p className="text-xl text-zinc-400 mb-8 leading-relaxed max-w-lg hero-intro">
-                Undgå at investere i "snake oil". Få teknisk validering af AI startups før du skriver checken.
+                Undgå at investere i "snake oil" - og forstå hvilke AI-trends der faktisk kommer til at forme markedet. Få teknisk validering og strategisk AI-rådgivning før du skriver checken.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
@@ -283,6 +291,154 @@ export default function InvestorAdvisoryPage() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* AI TREND ADVISORY SECTION */}
+      <section className="py-24 px-6 bg-zinc-950 border-y border-zinc-900">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-400/10 text-yellow-400 text-sm font-medium mb-6 border border-yellow-400/20">
+              <Compass className="w-4 h-4" />
+              <span>AI Investerings-Strategi</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">Forstå Hvor AI Er På Vej Hen</h2>
+            <p className="text-xl text-zinc-400 max-w-3xl mx-auto">
+              Due diligence validerer nutiden. Men de bedste investeringer kræver, at du forstår <span className="text-yellow-400 font-semibold">fremtiden</span>. Jeg hjælper investorer, bestyrelser og topledelse med at se, hvilke AI-trends der faktisk kommer - og hvilke virksomheder der tapper ind i dem.
+            </p>
+          </div>
+
+          {/* Track Record */}
+          <div className="mb-16">
+            <h3 className="text-2xl font-bold mb-8 text-center">Mit Track Record: Forudsigelser Der Holdt</h3>
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="p-6 bg-black border border-green-900/40 rounded-2xl relative overflow-hidden">
+                <div className="absolute top-0 right-0 px-3 py-1 bg-green-400/10 text-green-400 text-xs font-bold rounded-bl-xl">
+                  Forudsagt 2020
+                </div>
+                <Eye className="w-10 h-10 text-yellow-400 mb-4" />
+                <h4 className="text-lg font-bold mb-3">Agentic AI Ville Komme</h4>
+                <p className="text-zinc-400 text-sm mb-4">
+                  Allerede i 2020 forudsagde jeg, at den agentiske tilgang til AI og byggede produkter på den - hvor AI-systemer selvstændigt udfører komplekse opgaver - ville blive den dominerende paradigme.
+                </p>
+                <div className="pt-4 border-t border-zinc-800 space-y-2">
+                  <p className="text-green-400 text-sm font-medium flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4" />
+                    Bekræftet: AI Agents er nu industristandard
+                  </p>
+                  <a
+                    href="https://www.linkedin.com/posts/julianbentsingh_seo-digitalmarketing-ai-activity-6709776781727019008-rJlM"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-yellow-400 text-xs font-medium hover:text-yellow-300 transition-colors"
+                  >
+                    Se det originale opslag fra 2020
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </div>
+              </div>
+
+              <div className="p-6 bg-black border border-green-900/40 rounded-2xl relative overflow-hidden">
+                <div className="absolute top-0 right-0 px-3 py-1 bg-green-400/10 text-green-400 text-xs font-bold rounded-bl-xl">
+                  Forudsagt tidligt
+                </div>
+                <Zap className="w-10 h-10 text-yellow-400 mb-4" />
+                <h4 className="text-lg font-bold mb-3">Claude Ville Dominere for Professionelle</h4>
+                <p className="text-zinc-400 text-sm mb-4">
+                  Jeg forudsagde, at Anthropics Claude ville blive det foretrukne AI-værktøj for professionelle og virksomheder - over ChatGPT og andre konkurrenter.
+                </p>
+                <div className="pt-4 border-t border-zinc-800 space-y-2">
+                  <p className="text-green-400 text-sm font-medium flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4" />
+                    Bekræftet: Claude er førstevalg for professionelle
+                  </p>
+                  <a
+                    href="https://marketers.dk/blog/mm1490/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-yellow-400 text-xs font-medium hover:text-yellow-300 transition-colors"
+                  >
+                    Lyt til podcast fra 2024
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </div>
+              </div>
+
+              <div className="p-6 bg-black border border-green-900/40 rounded-2xl relative overflow-hidden">
+                <div className="absolute top-0 right-0 px-3 py-1 bg-green-400/10 text-green-400 text-xs font-bold rounded-bl-xl">
+                  Forudsagt tidligt
+                </div>
+                <Users className="w-10 h-10 text-yellow-400 mb-4" />
+                <h4 className="text-lg font-bold mb-3">AI-Organisationer & Agentsystemer</h4>
+                <p className="text-zinc-400 text-sm mb-4">
+                  Jeg forudsagde og tegnede fremkomsten af hele AI-organisationer og autonome agentsystemer som OpenClaw og PaperClip - hvor AI ikke bare assisterer, men driver hele organisationer.
+                </p>
+                <div className="pt-4 border-t border-zinc-800 space-y-2">
+                  <p className="text-green-400 text-sm font-medium flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4" />
+                    Bekræftet: AI-drevne organisationer er her
+                  </p>
+                  <a
+                    href="https://www.linkedin.com/posts/julianbentsingh_de-5-niveauer-i-ai-automatisering-ai-growth-activity-7295347152346636288-My7G"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-yellow-400 text-xs font-medium hover:text-yellow-300 transition-colors"
+                  >
+                    Se det originale opslag
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* What the advisory covers */}
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h3 className="text-2xl font-bold mb-6">Hvad Får Du Med AI Trend-Rådgivning?</h3>
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-yellow-400 shrink-0 mt-1" />
+                  <div>
+                    <p className="font-semibold text-white">Overblik over kommende AI-trends</p>
+                    <p className="text-zinc-400 text-sm">Forstå hvilke teknologiske skift der er på vej, og hvornår de rammer markedet.</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-yellow-400 shrink-0 mt-1" />
+                  <div>
+                    <p className="font-semibold text-white">Vurdering af investeringsmuligheder</p>
+                    <p className="text-zinc-400 text-sm">Hvilke virksomheder tapper ind i de rigtige trends? Og hvilke satser på en blindgyde?</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-yellow-400 shrink-0 mt-1" />
+                  <div>
+                    <p className="font-semibold text-white">Strategisk sparring for bestyrelser</p>
+                    <p className="text-zinc-400 text-sm">Deltag i bestyrelsesmøder og hjælp topledelsen med at forstå AI-landskabet og træffe informerede beslutninger.</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-yellow-400 shrink-0 mt-1" />
+                  <div>
+                    <p className="font-semibold text-white">Konkurrentanalyse i AI-spacet</p>
+                    <p className="text-zinc-400 text-sm">Forstå det teknologiske landskab, og hvem der reelt har en fordel versus hvem der lever af hype.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-8 bg-black border border-yellow-400/20 rounded-2xl">
+              <Compass className="w-12 h-12 text-yellow-400 mb-6" />
+              <h3 className="text-2xl font-bold mb-4">Hvorfor er dette vigtigt?</h3>
+              <p className="text-zinc-400 leading-relaxed mb-6">
+                AI-markedet bevæger sig hurtigere end noget andet teknologiområde. De investorer der forstår, hvad der kommer om 1-3 år, investerer i de rigtige virksomheder i dag.
+              </p>
+              <p className="text-zinc-400 leading-relaxed">
+                Min fordel er, at jeg ikke bare analyserer AI - jeg <span className="text-yellow-400 font-semibold">bygger på spydspisen hver dag</span>. Det giver en indsigt i teknologiens retning, som ingen desk research kan matche.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -406,9 +562,9 @@ export default function InvestorAdvisoryPage() {
       {/* CTA SECTION */}
       <section className="py-24 px-6 bg-yellow-400 text-black">
         <div className="container mx-auto max-w-4xl text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">Klar til at validere dit næste deal?</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">Klar til at investere smartere i AI?</h2>
           <p className="text-xl text-black/80 mb-10 max-w-2xl mx-auto">
-            Lad mig hjælpe dig med at identificere de reelle AI-virksomheder og undgå dyre fejlinvesteringer.
+            Lad mig hjælpe dig med at validere AI-startups, forstå fremtidens trends og investere i de virksomheder der tapper ind i de rigtige muligheder.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
