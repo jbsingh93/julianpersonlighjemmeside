@@ -158,6 +158,11 @@ export const HIGH_AUTHORITY_MENTIONS = [
     url: "https://seniorfolk.dk/danmarks-forende-15-eksperter-i-ai-2025/",
   },
   {
+    type: "NewsArticle" as const,
+    name: "Jyllands-Posten – Julian har forhandlet en millionaftale med hjælp fra AI-Jesus og Elon Musk",
+    url: "https://jyllands-posten.dk/erhverv/ECE19197351/julian-har-forhandlet-en-millionaftale-med-hjaelp-fra-aijesus-og-elon-musk/",
+  },
+  {
     type: "Article" as const,
     name: "Computerworld – Nørgaard & Singh om Open Source vs Big Tech",
     url: "https://www.computerworld.dk/art/290123/noergaard-skal-vi-satse-paa-open-source-eller-amerikansk-big-tech-i-denne-urolige-tid",

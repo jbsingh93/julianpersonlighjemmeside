@@ -105,33 +105,82 @@ export default function AboutPage() {
         ],
         // Subject of press mentions and authored articles
         subjectOf: [
-          ...HIGH_AUTHORITY_MENTIONS.slice(0, 10).map((mention) => {
-            if (mention.type === "VideoObject" && "description" in mention) {
+          ...HIGH_AUTHORITY_MENTIONS.slice(0, 10)
+            .filter((mention) => mention.type !== "NewsArticle")
+            .map((mention) => {
+              if (mention.type === "VideoObject" && "description" in mention) {
+                return {
+                  "@type": mention.type,
+                  name: mention.name,
+                  url: mention.url,
+                  description: mention.description,
+                  thumbnailUrl: mention.thumbnailUrl,
+                  uploadDate: mention.uploadDate,
+                  embedUrl: mention.embedUrl,
+                };
+              }
+              if (mention.type === "SoftwareApplication" && "applicationCategory" in mention) {
+                return {
+                  "@type": mention.type,
+                  name: mention.name,
+                  url: mention.url,
+                  applicationCategory: mention.applicationCategory,
+                  operatingSystem: mention.operatingSystem,
+                };
+              }
               return {
                 "@type": mention.type,
                 name: mention.name,
                 url: mention.url,
-                description: mention.description,
-                thumbnailUrl: mention.thumbnailUrl,
-                uploadDate: mention.uploadDate,
-                embedUrl: mention.embedUrl,
               };
-            }
-            if (mention.type === "SoftwareApplication" && "applicationCategory" in mention) {
-              return {
-                "@type": mention.type,
-                name: mention.name,
-                url: mention.url,
-                applicationCategory: mention.applicationCategory,
-                operatingSystem: mention.operatingSystem,
-              };
-            }
-            return {
-              "@type": mention.type,
-              name: mention.name,
-              url: mention.url,
-            };
-          }),
+            }),
+          {
+            "@type": "NewsArticle",
+            headline:
+              "Julian har forhandlet en millionaftale med hjælp fra AI-Jesus og Elon Musk",
+            name: "Julian har forhandlet en millionaftale med hjælp fra AI-Jesus og Elon Musk",
+            url: "https://jyllands-posten.dk/erhverv/ECE19197351/julian-har-forhandlet-en-millionaftale-med-hjaelp-fra-aijesus-og-elon-musk/",
+            mainEntityOfPage:
+              "https://jyllands-posten.dk/erhverv/ECE19197351/julian-har-forhandlet-en-millionaftale-med-hjaelp-fra-aijesus-og-elon-musk/",
+            datePublished: "2026-04-16T13:00:00+02:00",
+            dateModified: "2026-04-16T13:00:00+02:00",
+            author: {
+              "@type": "Person",
+              name: "Iben Marie Ryberg",
+              jobTitle: "Journalist",
+              worksFor: {
+                "@type": "NewsMediaOrganization",
+                name: "Jyllands-Posten",
+              },
+            },
+            description:
+              "Portrætartikel i Jyllands-Posten om Julian Bent Singh, stifter af AI Growth Minds, og hans gratis AI-bestyrelsessimulator, der efterligner kendte erhvervsprofiler som Oprah Winfrey, Warren Buffett og Elon Musk til strategisk beslutningsstøtte.",
+            articleSection: "Erhverv",
+            inLanguage: "da",
+            about: personRef(),
+            mentions: personRef(),
+            isAccessibleForFree: false,
+            isPartOf: {
+              "@type": "CreativeWork",
+              name: "Jyllands-Posten",
+              url: "https://jyllands-posten.dk/",
+            },
+            publisher: {
+              "@type": "NewsMediaOrganization",
+              name: "Jyllands-Posten",
+              alternateName: "Morgenavisen Jyllands-Posten",
+              url: "https://jyllands-posten.dk/",
+              issn: "0109-1182",
+              sameAs: [
+                "https://en.wikipedia.org/wiki/Jyllands-Posten",
+                "https://da.wikipedia.org/wiki/Morgenavisen_Jyllands-Posten",
+              ],
+              logo: {
+                "@type": "ImageObject",
+                url: "https://jyllands-posten.dk/favicon.ico",
+              },
+            },
+          },
           {
             "@type": "Book",
             name: "Agentbogen",
@@ -468,6 +517,17 @@ export default function AboutPage() {
               />
             </div>
             <ul className="list-disc list-inside space-y-3 ml-4">
+              <li>
+                <a
+                  href="https://jyllands-posten.dk/erhverv/ECE19197351/julian-har-forhandlet-en-millionaftale-med-hjaelp-fra-aijesus-og-elon-musk/"
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  className="text-blue-600 hover:underline"
+                >
+                  Jyllands-Posten: Julian har forhandlet en millionaftale med hjælp fra AI-Jesus og Elon Musk
+                </a>{" "}
+                – Portrætartikel af journalist Iben Marie Ryberg (16. april 2026) i Jyllands-Postens erhvervssektion om Julians gratis AI-bestyrelsessimulator, der efterligner kendte erhvervsprofiler som Oprah Winfrey, Warren Buffett og Elon Musk.
+              </li>
               <li>
                 <a
                   href="https://via.ritzau.dk/pressemeddelelse/14539618/dem-bor-du-folge-de-10-storste-ai-influencers"
