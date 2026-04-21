@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Hero from "@/components/Hero";
 import TrustBadges from "@/components/TrustBadges";
+import PressLogoStrip from "@/components/PressLogoStrip";
 import LogoCarousel from "@/components/LogoCarousel";
 import AIServices from "@/components/AIServices";
 import Invest from "@/components/Invest";
@@ -51,6 +52,7 @@ export default function Home() {
       <JsonLd schema={schema} />
       <Hero />
       <LogoCarousel />
+      <PressLogoStrip />
       <AIServices />
       <Invest />
       <References />
