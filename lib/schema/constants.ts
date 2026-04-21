@@ -163,6 +163,11 @@ export const HIGH_AUTHORITY_MENTIONS = [
     url: "https://jyllands-posten.dk/erhverv/ECE19197351/julian-har-forhandlet-en-millionaftale-med-hjaelp-fra-aijesus-og-elon-musk/",
   },
   {
+    type: "NewsArticle" as const,
+    name: "Børsen – Mine AI-agenter mangler en bankkonto, og det er bestyrelsens problem",
+    url: "https://borsen.dk/nyheder/opinion/mine-ai-agenter-mangler-en-bankkonto-og-det-er-bestyrelsens-problem",
+  },
+  {
     type: "Article" as const,
     name: "Computerworld – Nørgaard & Singh om Open Source vs Big Tech",
     url: "https://www.computerworld.dk/art/290123/noergaard-skal-vi-satse-paa-open-source-eller-amerikansk-big-tech-i-denne-urolige-tid",

@@ -135,6 +135,53 @@ export default function AboutPage() {
               };
             }),
           {
+            "@type": ["NewsArticle", "OpinionNewsArticle"],
+            headline:
+              "Mine AI-agenter mangler en bankkonto – og det er bestyrelsens problem",
+            name: "Mine AI-agenter mangler en bankkonto – og det er bestyrelsens problem",
+            url: "https://borsen.dk/nyheder/opinion/mine-ai-agenter-mangler-en-bankkonto-og-det-er-bestyrelsens-problem",
+            mainEntityOfPage:
+              "https://borsen.dk/nyheder/opinion/mine-ai-agenter-mangler-en-bankkonto-og-det-er-bestyrelsens-problem",
+            datePublished: "2026-04-21T08:40:00+02:00",
+            dateModified: "2026-04-21T08:40:00+02:00",
+            author: personRef(),
+            creator: personRef(),
+            description:
+              "Julian Bent Singh argumenterer for at bestyrelser skal tage stilling til AI-agenter som juridiske enheder med bankkonti og ansvar.",
+            articleSection: "Opinion",
+            genre: "Opinion",
+            inLanguage: "da",
+            keywords: [
+              "AI-agenter",
+              "Bestyrelsesansvar",
+              "AI governance",
+              "Corporate governance",
+              "AI og jura",
+            ],
+            isAccessibleForFree: false,
+            isPartOf: {
+              "@type": "CreativeWork",
+              name: "Børsen",
+              url: "https://borsen.dk/",
+            },
+            publisher: {
+              "@type": "NewsMediaOrganization",
+              name: "Børsen",
+              legalName: "Dagbladet Børsen A/S",
+              alternateName: "Dagbladet Børsen",
+              url: "https://borsen.dk/",
+              foundingDate: "1896",
+              sameAs: [
+                "https://en.wikipedia.org/wiki/Dagbladet_B%C3%B8rsen",
+                "https://da.wikipedia.org/wiki/B%C3%B8rsen_(avis)",
+              ],
+              logo: {
+                "@type": "ImageObject",
+                url: "https://borsen.dk/favicon.ico",
+              },
+            },
+          },
+          {
             "@type": "NewsArticle",
             headline:
               "Julian har forhandlet en millionaftale med hjælp fra AI-Jesus og Elon Musk",
@@ -519,6 +566,17 @@ export default function AboutPage() {
             <ul className="list-disc list-inside space-y-3 ml-4">
               <li>
                 <a
+                  href="https://borsen.dk/nyheder/opinion/mine-ai-agenter-mangler-en-bankkonto-og-det-er-bestyrelsens-problem"
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  className="text-blue-600 hover:underline"
+                >
+                  Børsen: Mine AI-agenter mangler en bankkonto – og det er bestyrelsens problem
+                </a>{" "}
+                – Debatindlæg af Julian i Børsens opinion-sektion (21. april 2026) om AI-agenter som juridiske enheder med bankkonti og bestyrelsesansvar.
+              </li>
+              <li>
+                <a
                   href="https://jyllands-posten.dk/erhverv/ECE19197351/julian-har-forhandlet-en-millionaftale-med-hjaelp-fra-aijesus-og-elon-musk/"
                   target="_blank"
                   rel="noopener noreferrer nofollow"
@@ -703,6 +761,17 @@ export default function AboutPage() {
               Julian deler sin viden gennem artikler, bogbidrag og publikationer om AI-implementering, AI agents og strategisk brug af AI:
             </p>
             <ul className="list-disc list-inside space-y-3 ml-4">
+              <li>
+                <a
+                  href="https://borsen.dk/nyheder/opinion/mine-ai-agenter-mangler-en-bankkonto-og-det-er-bestyrelsens-problem"
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  className="text-blue-600 hover:underline"
+                >
+                  Børsen: Mine AI-agenter mangler en bankkonto – og det er bestyrelsens problem
+                </a>{" "}
+                – Debatindlæg af Julian i Børsens opinion-sektion (21. april 2026), hvor han argumenterer for at bestyrelser skal tage stilling til AI-agenter som juridiske enheder med bankkonti og ansvar.
+              </li>
               <li>
                 <a
                   href="https://www.linkedin.com/posts/jloew_aiagenter-activity-7325383838711345152-Kvbk"
